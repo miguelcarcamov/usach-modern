@@ -1,3 +1,4 @@
+%!TeX program = xelatex
 \documentclass[xetex,aspectratio=169]{beamer}
 
 \usepackage[spanish]{babel}
@@ -33,12 +34,11 @@
         \titlepage
     \end{frame}
     
-
-    {
     \begin{frame}{Table of contents}
-        \tableofcontents
+        \begin{multicols}{2}
+        	\tableofcontents[hideothersubsections]
+        \end{multicols}
     \end{frame}
-    }
     
     %\section{Hello world}
     \section{Normal block}
