@@ -1,0 +1,183 @@
+%
+% Name    : beamerthememodern.sty
+% Author  : Nikolay Obedin (dancingrobot84@gmail.com)
+% Version : 0.1.0
+%
+
+\ProvidesPackage{beamerthememodern}[2024/11/05]
+\mode<presentation>
+
+\RequirePackage{pgfopts}
+\RequirePackage{tikz}
+
+% -- custom colors -- %
+\definecolor{usachCyan}{RGB}{0,164,153}
+\definecolor{usachOrange}{RGB}{234,118,0}
+\definecolor{usachBlack}{RGB}{57,64,73}
+
+
+\definecolor{modernWhite}{HTML}{FFFFFF}
+\definecolor{modernRed}{HTML}{E74C3C}
+\definecolor{modernBlue1}{HTML}{2980B9}
+\definecolor{modernBlue2}{HTML}{3498DB}
+\definecolor{modernGreen}{HTML}{1BAD58}
+\definecolor{modernDarkBlue}{HTML}{2C3E50}
+
+\setbeamertemplate{background canvas}
+{
+    \ifnum\c@framenumber=0%
+        \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{background_images/background_green.png}
+        \begin{tikzpicture}[remember picture, overlay]
+        \node[left=4cm, above=-0.1cm] at (current page.east) 
+        {
+            \includegraphics[width=0.35\textwidth]{background_images/diinf_cut.png}
+        };
+        \end{tikzpicture}
+    \else%
+        \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{background_images/background_1.png}
+    \fi%
+}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+% -- custom fonts -- %
+\usepackage{fontspec}
+\newfontfamily{\modernFontLight}{Roboto Light}
+\newfontfamily{\modernFontNormal}{Roboto}
+\newfontfamily{\modernFontBold}{Roboto Medium}
+\newfontfamily{\modernFontExtraBold}{Roboto Black}
+%\setmainfont[Ligatures=TeX]{Roboto Light}
+\setsansfont[Ligatures=TeX]{Roboto Light}
+\usefonttheme[onlymath]{serif}
+
+
+% -- general beamer colors -- %
+\setbeamercolor{palette primary}{bg=modernWhite, fg=usachBlack}
+\setbeamercolor{palette secondary}{bg=usachCyan, fg=modernWhite}
+\setbeamercolor{palette tertiary}{bg=usachOrange, fg=modernWhite}
+\setbeamercolor{palette quaternary}{bg=usachBlack, fg=modernWhite}
+
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{institute}{fg=white}
+\setbeamercolor{date}{fg=white}
+
+\setbeamercolor{frametitle}{parent=palette secondary}
+\setbeamercolor{section title}{parent=palette secondary}
+\setbeamercolor{section in toc}{parent=palette primary}
+
+\setbeamercolor{background canvas}{parent=palette secondary}
+\setbeamercolor{normal text}{fg=usachBlack}
+\setbeamercolor{item}{fg=usachCyan}
+
+\setbeamercolor{block title}{parent=palette quaternary}
+\setbeamercolor{block body}{bg=usachBlack!10, fg=usachBlack}
+\setbeamercolor{block title example}{bg=usachCyan, fg=modernWhite}
+\setbeamercolor{block body example}{bg=usachCyan!10, fg=usachBlack}
+
+\setbeamercolor{block title alerted}{bg=usachOrange, fg=modernWhite}
+\setbeamercolor{block body alerted}{bg=usachOrange!10, fg=usachBlack}
+
+\setbeamercolor{structure}{fg=usachCyan}
+
+
+% -- beamer fonts -- %
+\setbeamerfont{title}{family=\modernFontExtraBold, size=\fontsize{25}{25}}
+\setbeamerfont{subtitle}{family=\modernFontBold, size=\fontsize{15}{15}}
+\setbeamerfont{author}{family=\modernFontNormal, size=\fontsize{10}{10}}
+\setbeamerfont{institute}{family=\modernFontNormal, size=\fontsize{10}{10}}
+\setbeamerfont{date}{family=\modernFontNormal, size=\fontsize{7}{7}}
+
+\setbeamerfont{frametitle}{family=\modernFontBold, size=\fontsize{12}{12}}
+\setbeamerfont{section title}{family=\modernFontNormal, size=\fontsize{28}{28}}
+\setbeamerfont{section in toc}{family=\modernFontNormal, size=\fontsize{10}{10}}
+\setbeamerfont{title in head/foot}{family=\modernFontNormal, size=\fontsize{5}{5}}
+
+\setbeamerfont{item}{family=\modernFontNormal}
+\setbeamerfont{block title}{family=\modernFontNormal}
+\setbeamerfont{block body}{family=\modernFontLight}
+\setbeamerfont{block title example}{family=\modernFontNormal}
+\setbeamerfont{block body example}{family=\modernFontLight}
+\setbeamerfont{block title alerted}{family=\modernFontNormal}
+\setbeamerfont{block body alerted}{family=\modernFontLight}
+
+\setbeamerfont{page number in head/foot}{family=\modernFontBold}
+
+
+% -- beamer frame title -- %
+\setbeamertemplate{frametitle}{
+    \vspace{-0.15ex}
+    %\pgfsetfillopacity{0.35}
+    \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,rightskip=0.3cm,ht=3.9ex,dp=2ex]{frametitle}
+        \raisebox{0.1cm}[0pt][0pt]{
+            \usebeamerfont{frametitle}\MakeUppercase{\insertframetitle}%
+        }
+    \end{beamercolorbox}
+}
+
+
+% -- toc elements -- %
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+
+% -- itemize bullets -- %
+\newcommand{\modernBullet}{•}
+\setbeamertemplate{itemize item}{\modernBullet}
+\setbeamertemplate{itemize subitem}{\modernBullet}
+\setbeamertemplate{itemize subsubitem}{\modernBullet}
+
+
+% -- footline -- %
+\usenavigationsymbolstemplate{}
+\setbeamertemplate{headline}
+{
+	\leavevmode%
+	\hbox{%
+		\begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=0.5ex,center]{title in head/foot}%
+			\usebeamerfont{title in head/foot}\inserttitle
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=0.5ex,center]{title in head/foot}%
+                \usebeamerfont{title in head/foot}\insertsectionhead
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=0.5ex,center]{title in head/foot}%
+			\usebeamerfont{title in head/foot}
+		\insertshortdate
+		\end{beamercolorbox}
+
+	}
+}
+
+\setbeamertemplate{footline}{
+    \hspace*{\fill}
+    %\vspace*{-1cm}
+    \usebeamerfont{palette primary}
+    \raisebox{0.6cm}[0pt][0pt]{
+        \insertframenumber\,/\,\inserttotalframenumber\hspace*{1ex}
+        %\ifcase\value{framenumber} \or \or 1/2 \or 2/2 \or \fi\hspace*{1ex}
+    }
+    %\hspace*{\fill}
+}
+
+\setbeamertemplate{title page}{
+    \vspace*{5cm}
+    \begin{center}
+        \usebeamerfont{title} \color{white} \inserttitle
+        
+        \vspace*{0.2cm}
+        
+        \usebeamerfont{subtitle} \insertsubtitle
+        
+        \vspace*{0.2cm}
+        
+        \usebeamerfont{author} \insertauthor
+
+        \vspace*{1cm}
+        
+        \usebeamerfont{date} \insertdate
+    \end{center}
+}
+
+
+\mode<all>
