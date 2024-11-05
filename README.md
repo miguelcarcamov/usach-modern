@@ -1,8 +1,4 @@
-beamer-modern
+USACH Modern
 =============
 
-Modern theme for Beamer. Uses Roboto as default font and Flat UI color scheme.
-Hugely inspired by https://github.com/hsrmbeamertheme/hsrmbeamertheme.
-
-This is bootstrap template for a new presentation. Example output can be found
-[here](https://github.com/dancingrobot84/beamer-modern/blob/master/presentation.pdf).
+Template moderno con los colores corporativos 2023-2024 de la USACH.
