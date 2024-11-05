@@ -5,7 +5,9 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
-
+\usepackage{csquotes}
+\usepackage[backend=biber,style=apa,sorting=none]{biblatex}
+\addbibresource{biblio.bib}
 \usetheme{modern}
 
 
@@ -141,6 +143,11 @@
         \begin{equation}
             \text{RM} = \int n_e B_{\parallel}\,dl
         \end{equation}
+    \end{frame}
+
+    \begin{frame}[allowframebreaks]{Bibliography}
+        \printbibliography
+        \nocite{*}
     \end{frame}
 
     
