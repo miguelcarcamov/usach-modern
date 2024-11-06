@@ -10,7 +10,22 @@
 \RequirePackage{pgfopts}
 \RequirePackage{tikz}
 \RequirePackage{multicol}
+\RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
+\RequirePackage{ifpdf}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{pifont}
 
+\newif\ifxetexorluatex
+\ifxetex
+  \xetexorluatextrue
+\else
+  \ifluatex
+    \xetexorluatextrue
+  \else
+    \xetexorluatexfalse
+  \fi
+\fi
 % If you want to show the table of contents at the beginning of each section
 %\AtBeginSection
 %{\begin{frame}{Tabla de contenidos}
@@ -50,15 +65,25 @@
 \setbeamertemplate{blocks}[rounded][shadow=true]
 
 % -- custom fonts -- %
-\usepackage{fontspec}
-\newfontfamily{\modernFontLight}{Roboto Light}
-\newfontfamily{\modernFontNormal}{Roboto}
-\newfontfamily{\modernFontBold}{Roboto Medium}
-\newfontfamily{\modernFontExtraBold}{Roboto Black}
-%\setmainfont[Ligatures=TeX]{Roboto Light}
-\setsansfont[Ligatures=TeX]{Roboto Light}
-\usefonttheme[onlymath]{serif}
+\ifxetexorluatex
+    \usepackage{fontspec}
+    \newfontfamily{\modernFontLight}{Roboto Light}
+    \newfontfamily{\modernFontNormal}{Roboto}
+    \newfontfamily{\modernFontBold}{Roboto Medium}
+    \newfontfamily{\modernFontExtraBold}{Roboto Black}
+    \setsansfont[Ligatures=TeX]{Roboto Light}
+\else
+    % Default font for pdflatex
+    \ifpdf
+        \usepackage{lmodern}
+        \newcommand\modernFontLight{\fontfamily{lmss}\selectfont}       % Usa lmodern sans-serif
+        \newcommand\modernFontNormal{\fontfamily{lmss}\selectfont}      % Usa lmodern sans-serif
+        \newcommand\modernFontBold{\fontfamily{lmss}\bfseries\selectfont}  % lmodern sans-serif en negrita
+        \newcommand\modernFontExtraBold{\fontfamily{lmss}\bfseries\selectfont}
+    \fi
+\fi
 
+\usefonttheme[onlymath]{serif}
 
 % -- general beamer colors -- %
 \setbeamercolor{palette primary}{bg=modernWhite, fg=usachBlack}
@@ -118,11 +143,21 @@
 \setbeamertemplate{frametitle}{
     \vspace{-0.15ex}
     %\pgfsetfillopacity{0.35}
-    \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,rightskip=0.3cm,ht=3.9ex,dp=2ex]{frametitle}
-        \raisebox{0.1cm}[0pt][0pt]{
-            \usebeamerfont{frametitle}\MakeUppercase{\insertframetitle}%
-        }
-    \end{beamercolorbox}
+    \ifxetexorluatex
+        \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,rightskip=0.3cm,ht=3.9ex,dp=2ex]{frametitle}
+            \raisebox{0.1cm}[0pt][0pt]{
+                \usebeamerfont{frametitle}\MakeUppercase{\insertframetitle}%
+            }
+        \end{beamercolorbox}
+    \else
+        \ifpdf
+            \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,rightskip=0.3cm,ht=4.9ex,dp=2ex]{frametitle}
+                \raisebox{0.1cm}[0pt][0pt]{
+                    \usebeamerfont{frametitle}\MakeUppercase{\insertframetitle}%
+                }
+            \end{beamercolorbox}
+        \fi
+    \fi       
 }
 
 
@@ -132,10 +167,20 @@
 
 
 % -- itemize bullets -- %
-\newcommand{\modernBullet}{•}
-\setbeamertemplate{itemize item}{\modernBullet}
-\setbeamertemplate{itemize subitem}{\modernBullet}
-\setbeamertemplate{itemize subsubitem}{\modernBullet}
+\ifxetexorluatex
+    \newcommand{\modernBullet}{•}
+    \setbeamertemplate{itemize item}{\modernBullet}
+    \setbeamertemplate{itemize subitem}{\modernBullet}
+    \setbeamertemplate{itemize subsubitem}{\modernBullet}
+\else
+    \ifpdf
+        \DeclareUnicodeCharacter{2009}{\,}
+        \newcommand{\modernBullet}{$\bullet$}
+        \setbeamertemplate{itemize item}{\modernBullet}
+        \setbeamertemplate{itemize subitem}{\modernBullet}
+        \setbeamertemplate{itemize subsubitem}{\modernBullet}
+    \fi
+\fi
 
 
 % -- footline -- %
